@@ -36,7 +36,10 @@ namespace MusicCollection.Controllers
 
         public ActionResult Details(int id)
         {
-            
+            Type thisType = _db.Types.FirstOrDefault(type => type.TypeId == id);
+            thisType.Collections = _db.Collections.Where(collection => collection.MusicId == id).ToList();
+            return View(thisType);
         }
     }
 }
+
