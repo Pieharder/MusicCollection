@@ -60,6 +60,15 @@ namespace MusicCollection.Controllers
             var thisType = _db.Types.FirstOrDefault(type => type.TypeId == id);
             return View(thisType); 
         }
+
+        [HttpPost, ActionResult("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            var thisType = _db.Types.FirstOrDefault(types => types.TypeId == id);
+            _db.Types.Remove(thisType);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
 
