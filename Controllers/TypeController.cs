@@ -40,6 +40,26 @@ namespace MusicCollection.Controllers
             thisType.Collections = _db.Collections.Where(collection => collection.MusicId == id).ToList();
             return View(thisType);
         }
+
+        public ActionResult Edit(int id)
+        {
+            var thisType = _db.Types.FirstOrDefault(type => type.TypeId == id);
+            return View(thisType);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Type type)
+        {
+            _db.Entry(type).State = EntityState.Modified;
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var thisType = _db.Types.FirstOrDefault(type => type.TypeId == id);
+            return View(thisType); 
+        }
     }
 }
 
