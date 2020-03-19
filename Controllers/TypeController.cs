@@ -14,5 +14,29 @@ namespace MusicCollection.Controllers
         {
             _db = db;
         }
+
+        public ActionResult Index()
+        {
+            List<Type> model = _db.Types.ToList();
+            return View(models);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Type Type)
+        {
+            _db.Types.Add(type);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Details(int id)
+        {
+            
+        }
     }
 }
